@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breakfast Menu</title>
+    <style>
+        body { background: #000; color: #fff; padding: 15px; font-family: Arial; }
+        .home-btn { background: #222; color: #fff; padding: 8px 15px; border: 1px solid red; border-radius: 4px; text-decoration: none; display: inline-block; margin-bottom: 15px; }
+        .home-btn:hover { background: red; }
+        .container { max-width: 600px; margin: auto; }
+        .header { background: red; color: white; padding: 15px; text-align: center; margin-bottom: 15px; }
+        .item { background: #222; padding: 10px; margin-bottom: 10px; border-left: 3px solid red; }
+        .item-header { display: flex; justify-content: space-between; margin-bottom: 5px; }
+        .name { font-weight: bold; }
+        .price { color: red; font-weight: bold; }
+        .desc { color: #ccc; font-size: 14px; margin-bottom: 5px; }
+        .order-btn { background: #333; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; }
+        .order-summary { background: #222; padding: 15px; margin-top: 15px; display: none; }
+        .order-list { list-style: none; padding: 0; }
+        .order-list li { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #333; }
+        .total { text-align: right; font-weight: bold; color: red; margin-top: 10px; }
+        .action-btns { display: flex; gap: 10px; margin-top: 10px; }
+        .action-btns button { flex: 1; padding: 8px; border: none; border-radius: 3px; cursor: pointer; }
+        .confirm-btn { background: red; color: white; }
+        .clear-btn { background: #333; color: white; }
+    </style>
+</head>
+<body>
+    <a href="/html/home.html" class="home-btn">← Home</a>
+    <a href="/html/order.html" class="home-btn">← Order list</a>
+    
+    <div class="container">
+        <div class="header">
+            <h2>Breakfast Menu</h2>
+            <p>Start your day with energy | Served: 7:00 AM - 11:00 AM</p>
+        </div>
+        
+        <div class="item">
+            <div class="item-header">
+                <span class="name">Egg Sandwich</span>
+                <span class="price">289.44 ETB</span>
+            </div>
+            <div class="desc">onion, chili, tomato, lettuce, ketchup</div>
+            <button class="order-btn" onclick="addOrder('Egg Sandwich', 289.44)">Add to Order</button>
+        </div>
+        
+        <div class="item">
+            <div class="item-header">
+                <span class="name">Egg Slice</span>
+                <span class="price">289.44 ETB</span>
+            </div>
+            <div class="desc">Egg, tomato sauce</div>
+            <button class="order-btn" onclick="addOrder('Egg Slice', 289.44)">Add to Order</button>
+        </div>
+        
+        <div class="item">
+            <div class="item-header">
+                <span class="name">Cheese Omelet</span>
+                <span class="price">289.44 ETB</span>
+            </div>
+            <div class="desc">Egg, Cheese, onion, chili, tomato</div>
+            <button class="order-btn" onclick="addOrder('Cheese Omelet', 289.44)">Add to Order</button>
+        </div>
+        
+        <div class="item">
+            <div class="item-header">
+                <span class="name">Vegetable Omelet</span>
+                <span class="price">289.44 ETB</span>
+            </div>
+            <div class="desc">Egg, pepper</div>
+            <button class="order-btn" onclick="addOrder('Vegetable Omelet', 289.44)">Add to Order</button>
+        </div>
+        
+        <div class="item">
+            <div class="item-header">
+                <span class="name">Pan Cake</span>
+                <span class="price">289.44 ETB</span>
+            </div>
+            <div class="desc">Egg, olive oil, syrup</div>
+            <button class="order-btn" onclick="addOrder('Pan Cake', 289.44)">Add to Order</button>
+        </div>
+        
+        <div class="item">
+            <div class="item-header">
+                <span class="name">Fasting Firfire</span>
+                <span class="price">289.44 ETB</span>
+            </div>
+            <div class="desc">Traditional fasting dish</div>
+            <button class="order-btn" onclick="addOrder('Fasting Firfire', 289.44)">Add to Order</button>
+        </div>
+        
+        <div class="item">
+            <div class="item-header">
+                <span class="name">Fasting Fetira</span>
+                <span class="price">289.44 ETB</span>
+            </div>
+            <div class="desc">Traditional fasting bread</div>
+            <button class="order-btn" onclick="addOrder('Fasting Fetira', 289.44)">Add to Order</button>
+        </div>
+        
+        <div class="item">
+            <div class="item-header">
+                <span class="name">Coffee</span>
+                <span class="price">65.00 ETB</span>
+            </div>
+            <div class="desc">Fresh brewed coffee, hot or iced</div>
+            <button class="order-btn" onclick="addOrder('Coffee', 65.00)">Add to Order</button>
+        </div>
+        
+        <div class="item">
+            <div class="item-header">
+                <span class="name">Fresh Juice</span>
+                <span class="price">95.00 ETB</span>
+            </div>
+            <div class="desc">Orange, mango, or avocado juice</div>
+            <button class="order-btn" onclick="addOrder('Fresh Juice', 95.00)">Add to Order</button>
+        </div>
+        
+        <div class="order-summary" id="orderSummary">
+            <h3>Your Breakfast Order</h3>
+            <ul class="order-list" id="orderList"></ul>
+            <div class="total" id="totalPrice">Total: 0.00 ETB</div>
+            <div class="action-btns">
+                <button class="clear-btn" onclick="clearOrder()">Clear</button>
+                <button class="confirm-btn" onclick="confirmOrder()">Confirm</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let orderItems = [];
+        let total = 0;
+        
+        function addOrder(item, price) {
+            orderItems.push({name: item, price: price});
+            total += price;
+            
+            document.getElementById('orderList').innerHTML = '';
+            orderItems.forEach(item => {
+                let li = document.createElement('li');
+                li.innerHTML = `<span>${item.name}</span><span>${item.price.toFixed(2)} ETB</span>`;
+                document.getElementById('orderList').appendChild(li);
+            });
+            
+            document.getElementById('totalPrice').textContent = `Total: ${total.toFixed(2)} ETB`;
+            document.getElementById('orderSummary').style.display = 'block';
+            
+            event.target.textContent = 'Added!';
+            setTimeout(() => event.target.textContent = 'Add to Order', 1000);
+        }
+        
+        function clearOrder() {
+            orderItems = [];
+            total = 0;
+            document.getElementById('orderList').innerHTML = '';
+            document.getElementById('totalPrice').textContent = 'Total: 0.00 ETB';
+            document.getElementById('orderSummary').style.display = 'none';
+        }
+        
+        function confirmOrder() {
+            if (orderItems.length === 0) return alert('Order is empty');
+            let summary = orderItems.map(i => `${i.name}: ${i.price.toFixed(2)} ETB`).join('\n');
+            alert(`Order:\n${summary}\n\nTotal: ${total.toFixed(2)} ETB\n\nOrder Confirmed!`);
+            clearOrder();
+        }
+    </script>
+</body>
+</html>

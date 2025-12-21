@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>HARD ROCK RESTAURANT - Full Cart Modal</title>
+<link rel="stylesheet" href="/css/order.css">
+<script src="/script/order.js"></script>
+
+
+</head>
+<body>
+
+<div class="top-controls">
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search food..." oninput="showSuggestions(this.value)">
+        <button onclick="searchFood()">Search</button>
+        <div class="suggestions" id="suggestions"></div>
+    </div>
+    <a href="/html/home.html" class="home-btn">Home</a>
+    <button class="theme-btn" onclick="toggleTheme()">🌙</button>
+    
+</div>
+
+<div class="logo"><img src="/images/firstpage0.png"></div>
+<div class="foody"><h2><u><i>HARD ROCK MENU</i></u></h2></div>
+<p id="notFound">We’re sorry, we don’t have such food.</p>
+
+<section class="items">
+<div class="item" data-name="breakfast" ><img src="/images/healthy-7213383.jpg"><h4>Breakfast</h4><a href="/html/breakfast lists.html"><button onclick="addToCartModal(this)"><i>Order</i></button></a></div>
+<div class="item" data-name="pizza burger" ><img src="/images/burger-8933592.jpg"><h4>Pizza & Burger</h4><a href="/html/p & b list.html"><button onclick="addToCartModal(this)"><i>Order</i></button></a></div>
+<div class="item" data-name="beef lamb" ><img src="/images/food-3676793.jpg"><h4>Beef & Lamb</h4><a href="/html/beef& lamb list.html"><button onclick="addToCartModal(this)"><i>Order</i></button></a></div>
+<div class="item" data-name="traditional foods" ><img src="/images/trad2.jpg"><h4>Traditional dishs</h4><a href="/html/traditional.html"><button onclick="addToCartModal(this)"><i>Order</i></button></a></div>
+<div class="item" data-name="chicken"><img src="/images/chicken-8933409.jpg"><h4>Chicken</h4><a href="/html/chicken.html"><button onclick="addToCartModal(this)"><i>Order</i></button></a></div>
+<div class="item" data-name="hot drink tea coffee" ><img src="/images/tea-8798654.jpg"><h4>Hotdrink</h4><a href="/html/hotdrink.html"><button onclick="addToCartModal(this)"><i>Order</i></button></a></div>
+<div class="item" data-name="juice sweet fresh"><img src="/images/fruit-1850032.jpg"><h4>Sweet & fesh Juices</h4><a href="/html/juice.html"><button onclick="addToCartModal(this)"><i>Order</i></button></a></div>
+<div class="item" data-name="cold beverage soda"><img src="/images/coca-cola-4404130.jpg"><h4>Cold Beverages</h4><a href="/html/cold bev.html"><button onclick="addToCartModal(this)"><i>Order</i></button></a></div>
+<div class="item" data-name="beer alcohol"><img src="/images/wine-5444304.jpg"><h4>Beer</h4><a href="/html/beer.html"><button onclick="addToCartModal(this)"><i>Order</i></button></a></div>
+</section>
+
+<footer><h4>© 2025 hard-rock restaurant — all rights reserved</h4></footer>
+
+
+
+
+</body>
+</html>

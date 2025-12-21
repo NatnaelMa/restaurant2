@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotdrinks Menu</title>
+    <style>
+        body { background: #000; color: #fff; padding: 15px; font-family: Arial; }
+        .home-btn { background: #222; color: #fff; padding: 8px 15px; border: 1px solid red; border-radius: 4px; text-decoration: none; display: inline-block; margin-bottom: 15px; }
+        .home-btn:hover { background: red; }
+        .container { max-width: 600px; margin: auto; }
+        .header { background: red; color: white; padding: 15px; text-align: center; margin-bottom: 15px; }
+        .item { background: #222; padding: 10px; margin-bottom: 10px; border-left: 3px solid red; }
+        .item-header { display: flex; justify-content: space-between; margin-bottom: 5px; }
+        .name { font-weight: bold; }
+        .price { color: red; font-weight: bold; }
+        .desc { color: #ccc; font-size: 14px; margin-bottom: 5px; }
+        .order-btn { background: #333; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; }
+        .order-summary { background: #222; padding: 15px; margin-top: 15px; display: none; }
+        .order-list { list-style: none; padding: 0; }
+        .order-list li { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #333; }
+        .total { text-align: right; font-weight: bold; color: red; margin-top: 10px; }
+        .action-btns { display: flex; gap: 10px; margin-top: 10px; }
+        .action-btns button { flex: 1; padding: 8px; border: none; border-radius: 3px; cursor: pointer; }
+        .confirm-btn { background: red; color: white; }
+        .clear-btn { background: #333; color: white; }
+    </style>
+</head>
+<body>
+    <a href="/html/home.html" class="home-btn">← Home</a>
+    <a href="/html/order.html" class="home-btn">← Order list</a>
+    
+    <div class="container">
+        <div class="header">
+            <h2>Hotdrinks Menu</h2>
+            <p>Warm beverages to complete your meal</p>
+        </div>
+        
+        <div class="item">
+            <div class="item-header">
+                <span class="name">Macchiato</span>
+                <span class="price">50.00 ETB</span>
+            </div>
+            <div class="desc">Espresso with a dash of steamed milk</div>
+            <button class="order-btn" onclick="addOrder('Macchiato', 50.00)">Add to Order</button>
+        </div>
+        
+        <div class="item">
+            <div class="item-header">
+                <span class="name">Coffee</span>
+                <span class="price">50.00 ETB</span>
+            </div>
+            <div class="desc">Freshly brewed hot coffee</div>
+            <button class="order-btn" onclick="addOrder('Coffee', 50.00)">Add to Order</button>
+        </div>
+        
+        <div class="item">
+            <div class="item-header">
+                <span class="name">Milk</span>
+                <span class="price">65.00 ETB</span>
+            </div>
+            <div class="desc">Hot milk, plain or with flavor</div>
+            <button class="order-btn" onclick="addOrder('Milk', 65.00)">Add to Order</button>
+        </div>
+        
+        <div class="item">
+            <div class="item-header">
+                <span class="name">Tea</span>
+                <span class="price">50.00 ETB</span>
+            </div>
+            <div class="desc">Hot tea with your choice of flavor</div>
+            <button class="order-btn" onclick="addOrder('Tea', 50.00)">Add to Order</button>
+        </div>
+        
+        <div class="item">
+            <div class="item-header">
+                <span class="name">Cappuccino</span>
+                <span class="price">80.00 ETB</span>
+            </div>
+            <div class="desc">Espresso with steamed milk foam</div>
+            <button class="order-btn" onclick="addOrder('Cappuccino', 80.00)">Add to Order</button>
+        </div>
+        
+        <div class="item">
+            <div class="item-header">
+                <span class="name">Lemon Tea</span>
+                <span class="price">50.00 ETB</span>
+            </div>
+            <div class="desc">Hot tea with fresh lemon</div>
+            <button class="order-btn" onclick="addOrder('Lemon Tea', 50.00)">Add to Order</button>
+        </div>
+        
+        <!-- Added more hotdrinks -->
+        <div class="item">
+            <div class="item-header">
+                <span class="name">Hot Chocolate</span>
+                <span class="price">70.00 ETB</span>
+            </div>
+            <div class="desc">Rich creamy hot chocolate</div>
+            <button class="order-btn" onclick="addOrder('Hot Chocolate', 70.00)">Add to Order</button>
+        </div>
+        
+        <div class="item">
+            <div class="item-header">
+                <span class="name">Latte</span>
+                <span class="price">75.00 ETB</span>
+            </div>
+            <div class="desc">Espresso with steamed milk</div>
+            <button class="order-btn" onclick="addOrder('Latte', 75.00)">Add to Order</button>
+        </div>
+        
+        <div class="item">
+            <div class="item-header">
+                <span class="name">Mint Tea</span>
+                <span class="price">55.00 ETB</span>
+            </div>
+            <div class="desc">Hot tea with fresh mint leaves</div>
+            <button class="order-btn" onclick="addOrder('Mint Tea', 55.00)">Add to Order</button>
+        </div>
+        
+        <div class="order-summary" id="orderSummary">
+            <h3>Your Hotdrinks Order</h3>
+            <ul class="order-list" id="orderList"></ul>
+            <div class="total" id="totalPrice">Total: 0.00 ETB</div>
+            <div class="action-btns">
+                <button class="clear-btn" onclick="clearOrder()">Clear</button>
+                <button class="confirm-btn" onclick="confirmOrder()">Confirm</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let orderItems = [];
+        let total = 0;
+        
+        function addOrder(item, price) {
+            orderItems.push({name: item, price: price});
+            total += price;
+            
+            document.getElementById('orderList').innerHTML = '';
+            orderItems.forEach(item => {
+                let li = document.createElement('li');
+                li.innerHTML = `<span>${item.name}</span><span>${item.price.toFixed(2)} ETB</span>`;
+                document.getElementById('orderList').appendChild(li);
+            });
+            
+            document.getElementById('totalPrice').textContent = `Total: ${total.toFixed(2)} ETB`;
+            document.getElementById('orderSummary').style.display = 'block';
+            
+            event.target.textContent = 'Added!';
+            setTimeout(() => event.target.textContent = 'Add to Order', 1000);
+        }
+        
+        function clearOrder() {
+            orderItems = [];
+            total = 0;
+            document.getElementById('orderList').innerHTML = '';
+            document.getElementById('totalPrice').textContent = 'Total: 0.00 ETB';
+            document.getElementById('orderSummary').style.display = 'none';
+        }
+        
+        function confirmOrder() {
+            if (orderItems.length === 0) return alert('Order is empty');
+            let summary = orderItems.map(i => `${i.name}: ${i.price.toFixed(2)} ETB`).join('\n');
+            alert(`Order:\n${summary}\n\nTotal: ${total.toFixed(2)} ETB\n\nOrder Confirmed! Enjoy your hot drinks!`);
+            clearOrder();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #000;
+            color: #fff;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            color: #fff;
+            margin: 20px 0;
+            font-size: 2rem;
+        }
+        
+        h2 {
+            color: #fff;
+            margin: 30px 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ff0000;
+        }
+        
+        .back-link {
+            display: inline-block;
+            color: #ff0000;
+            text-decoration: none;
+            margin: 10px 0 20px 0;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        .gallery-intro {
+            background: #222;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .gallery-categories {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .category-btn {
+            background: #333;
+            color: #fff;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        
+        .category-btn.active {
+            background: #ff0000;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .gallery-item {
+            background: #222;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .gallery-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .img-caption {
+            padding: 15px;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        
+        .video-section {
+            margin: 40px 0;
+        }
+        
+        .video-container {
+            background: #222;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .video-placeholder {
+            background: #333;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            border-radius: 5px;
+        }
+        
+        .cta-box {
+            background: #222;
+            padding: 30px;
+            text-align: center;
+            margin: 40px 0;
+            border-radius: 8px;
+            border: 2px solid #ff0000;
+        }
+        
+        .cta-btn {
+            background: #ff0000;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            text-decoration: none;
+            display: inline-block;
+        }
+    

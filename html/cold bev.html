@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cold Beverages Menu</title>
+    <style>
+        body { background: #000; color: #fff; padding: 15px; font-family: Arial; }
+        .home-btn { background: #222; color: #fff; padding: 8px 15px; border: 1px solid red; border-radius: 4px; text-decoration: none; display: inline-block; margin-bottom: 15px; }
+        .home-btn:hover { background: red; }
+        .container { max-width: 600px; margin: auto; }
+        .header { background: red; color: white; padding: 15px; text-align: center; margin-bottom: 15px; }
+        .item { background: #222; padding: 10px; margin-bottom: 10px; border-left: 3px solid red; }
+        .item-header { display: flex; justify-content: space-between; margin-bottom: 5px; }
+        .name { font-weight: bold; }
+        .price { color: red; font-weight: bold; }
+        .desc { color: #ccc; font-size: 14px; margin-bottom: 5px; }
+        .order-btn { background: #333; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; }
+        .order-summary { background: #222; padding: 15px; margin-top: 15px; display: none; }
+        .order-list { list-style: none; padding: 0; }
+        .order-list li { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #333; }
+        .total { text-align: right; font-weight: bold; color: red; margin-top: 10px; }
+        .action-btns { display: flex; gap: 10px; margin-top: 10px; }
+        .action-btns button { flex: 1; padding: 8px; border: none; border-radius: 3px; cursor: pointer; }
+        .confirm-btn { background: red; color: white; }
+        .clear-btn { background: #333; color: white; }
+    </style>
+</head>
+<body>
+   <a href="/html/home.html" class="home-btn">← Home</a>
+    <a href="/html/order.html" class="home-btn">← Order list</a>
+    
+    <div class="container">
+        <div class="header">
+            <h2>Cold Beverages Menu</h2>
+            <p>Refreshing drinks to cool you down</p>
+        </div>
+        
+        <div class="item">
+            <div class="item-header">
+                <span class="name">Soft Drink</span>
+                <span class="price">50.00 ETB</span>
+            </div>
+            <div class="desc">Coke, Fanta, Sprite, or Mirinda</div>
+            <button class="order-btn" onclick="addOrder('Soft Drink', 50.00)">Add to Order</button>
+        </div>
+        
+        <div class="item">
+            <div class="item-header">
+                <span class="name">Ambo Water</span>
+                <span class="price">50.44 ETB</span>
+            </div>
+            <div class="desc">Natural sparkling mineral water</div>
+            <button class="order-btn" onclick="addOrder('Ambo Water', 50.44)">Add to Order</button>
+        </div>
+        
+        <div class="item">
+            <div class="item-header">
+                <span class="name">Small Water</span>
+                <span class="price">35.00 ETB</span>
+            </div>
+            <div class="desc">300ml bottled water</div>
+            <button class="order-btn" onclick="addOrder('Small Water', 35.00)">Add to Order</button>
+        </div>
+        
+        <div class="item">
+            <div class="item-header">
+                <span class="name">Medium Water</span>
+                <span class="price">40.00 ETB</span>
+            </div>
+            <div class="desc">500ml bottled water</div>
+            <button class="order-btn" onclick="addOrder('Medium Water', 40.00)">Add to Order</button>
+        </div>
+        
+        <div class="item">
+            <div class="item-header">
+                <span class="name">Big Water</span>
+                <span class="price">58.00 ETB</span>
+            </div>
+            <div class="desc">1L bottled water</div>
+            <button class="order-btn" onclick="addOrder('Big Water', 58.00)">Add to Order</button>
+        </div>
+        
+        <div class="item">
+            <div class="item-header">
+                <span class="name">Royal Tonic</span>
+                <span class="price">75.00 ETB</span>
+            </div>
+            <div class="desc">Premium tonic water</div>
+            <button class="order-btn" onclick="addOrder('Royal Tonic', 75.00)">Add to Order</button>
+        </div>
+        
+        <!-- Added more cold beverages -->
+        <div class="item">
+            <div class="item-header">
+                <span class="name">Iced Tea</span>
+                <span class="price">60.00 ETB</span>
+            </div>
+            <div class="desc">Chilled tea with lemon</div>
+            <button class="order-btn" onclick="addOrder('Iced Tea', 60.00)">Add to Order</button>
+        </div>
+        
+        <div class="item">
+            <div class="item-header">
+                <span class="name">Milkshake</span>
+                <span class="price">80.00 ETB</span>
+            </div>
+            <div class="desc">Chocolate, vanilla, or strawberry</div>
+            <button class="order-btn" onclick="addOrder('Milkshake', 80.00)">Add to Order</button>
+        </div>
+        
+        <div class="order-summary" id="orderSummary">
+            <h3>Your Cold Beverages Order</h3>
+            <ul class="order-list" id="orderList"></ul>
+            <div class="total" id="totalPrice">Total: 0.00 ETB</div>
+            <div class="action-btns">
+                <button class="clear-btn" onclick="clearOrder()">Clear</button>
+                <button class="confirm-btn" onclick="confirmOrder()">Confirm</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let orderItems = [];
+        let total = 0;
+        
+        function addOrder(item, price) {
+            orderItems.push({name: item, price: price});
+            total += price;
+            
+            document.getElementById('orderList').innerHTML = '';
+            orderItems.forEach(item => {
+                let li = document.createElement('li');
+                li.innerHTML = `<span>${item.name}</span><span>${item.price.toFixed(2)} ETB</span>`;
+                document.getElementById('orderList').appendChild(li);
+            });
+            
+            document.getElementById('totalPrice').textContent = `Total: ${total.toFixed(2)} ETB`;
+            document.getElementById('orderSummary').style.display = 'block';
+            
+            event.target.textContent = 'Added!';
+            setTimeout(() => event.target.textContent = 'Add to Order', 1000);
+        }
+        
+        function clearOrder() {
+            orderItems = [];
+            total = 0;
+            document.getElementById('orderList').innerHTML = '';
+            document.getElementById('totalPrice').textContent = 'Total: 0.00 ETB';
+            document.getElementById('orderSummary').style.display = 'none';
+        }
+        
+        function confirmOrder() {
+            if (orderItems.length === 0) return alert('Order is empty');
+            let summary = orderItems.map(i => `${i.name}: ${i.price.toFixed(2)} ETB`).join('\n');
+            alert(`Order:\n${summary}\n\nTotal: ${total.toFixed(2)} ETB\n\nOrder Confirmed! Enjoy your cold beverages!`);
+            clearOrder();
+        }
+    </script>
+</body>
+</html>

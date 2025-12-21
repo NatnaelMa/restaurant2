@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza & Burger Menu</title>
+    <style>
+        body { background: #000; color: #fff; padding: 15px; font-family: Arial; }
+        .home-btn { background: #222; color: #fff; padding: 8px 15px; border: 1px solid red; border-radius: 4px; text-decoration: none; display: inline-block; margin-bottom: 15px; }
+        .home-btn:hover { background: red; }
+        .container { max-width: 600px; margin: auto; }
+        .header { background: red; color: white; padding: 15px; text-align: center; margin-bottom: 15px; }
+        .item { background: #222; padding: 10px; margin-bottom: 10px; border-left: 3px solid red; }
+        .item-header { display: flex; justify-content: space-between; margin-bottom: 5px; }
+        .name { font-weight: bold; }
+        .price { color: red; font-weight: bold; }
+        .desc { color: #ccc; font-size: 14px; margin-bottom: 5px; }
+        .order-btn { background: #333; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; }
+        .order-summary { background: #222; padding: 15px; margin-top: 15px; display: none; }
+        .order-list { list-style: none; padding: 0; }
+        .order-list li { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #333; }
+        .total { text-align: right; font-weight: bold; color: red; margin-top: 10px; }
+        .action-btns { display: flex; gap: 10px; margin-top: 10px; }
+        .action-btns button { flex: 1; padding: 8px; border: none; border-radius: 3px; cursor: pointer; }
+        .confirm-btn { background: red; color: white; }
+        .clear-btn { background: #333; color: white; }
+    </style>
+</head>
+<body>
+   <a href="/html/home.html" class="home-btn">← Home</a>
+    <a href="/html/order.html" class="home-btn">← Order list</a>
+    
+    <div class="container">
+        <div class="header">
+            <h2>Pizza & Burger Menu</h2>
+            <p>Delicious combos for everyone</p>
+        </div>
+        
+        <div class="item">
+            <div class="item-header">
+                <span class="name">Beef Burger</span>
+                <span class="price">289.44 ETB</span>
+            </div>
+            <div class="desc">Beef patty, lettuce, tomato, cheese, sauce, fries</div>
+            <button class="order-btn" onclick="addOrder('Beef Burger', 289.44)">Add to Order</button>
+        </div>
+        
+        <div class="item">
+            <div class="item-header">
+                <span class="name">Tuna Pizza</span>
+                <span class="price">289.44 ETB</span>
+            </div>
+            <div class="desc">Tuna, onions, garlic, tomato sauce, cheese</div>
+            <button class="order-btn" onclick="addOrder('Tuna Pizza', 289.44)">Add to Order</button>
+        </div>
+        
+        <div class="item">
+            <div class="item-header">
+                <span class="name">Rock 'n' Roll Combo</span>
+                <span class="price">550.00 ETB</span>
+            </div>
+            <div class="desc">1 Burger + 1 Pizza + 2 Drinks + Fries</div>
+            <button class="order-btn" onclick="addOrder('Rock n Roll Combo', 550.00)">Add to Order</button>
+        </div>
+        
+        <div class="item">
+            <div class="item-header">
+                <span class="name">Family Feast</span>
+                <span class="price">850.00 ETB</span>
+            </div>
+            <div class="desc">2 Burgers + 1 Large Pizza + 4 Drinks + Fries</div>
+            <button class="order-btn" onclick="addOrder('Family Feast', 850.00)">Add to Order</button>
+        </div>
+        
+        <div class="item">
+            <div class="item-header">
+                <span class="name">Student Deal</span>
+                <span class="price">399.00 ETB</span>
+            </div>
+            <div class="desc">1 Burger or Pizza + 1 Drink + Fries</div>
+            <button class="order-btn" onclick="addOrder('Student Deal', 399.00)">Add to Order</button>
+        </div>
+        
+        <div class="item">
+            <div class="item-header">
+                <span class="name">Party Pack</span>
+                <span class="price">1200.00 ETB</span>
+            </div>
+            <div class="desc">4 Burgers + 2 Large Pizzas + 6 Drinks</div>
+            <button class="order-btn" onclick="addOrder('Party Pack', 1200.00)">Add to Order</button>
+        </div>
+        
+        <div class="order-summary" id="orderSummary">
+            <h3>Your Pizza & Burger Order</h3>
+            <ul class="order-list" id="orderList"></ul>
+            <div class="total" id="totalPrice">Total: 0.00 ETB</div>
+            <div class="action-btns">
+                <button class="clear-btn" onclick="clearOrder()">Clear</button>
+                <button class="confirm-btn" onclick="confirmOrder()">Confirm</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let orderItems = [];
+        let total = 0;
+        
+        function addOrder(item, price) {
+            orderItems.push({name: item, price: price});
+            total += price;
+            
+            document.getElementById('orderList').innerHTML = '';
+            orderItems.forEach(item => {
+                let li = document.createElement('li');
+                li.innerHTML = `<span>${item.name}</span><span>${item.price.toFixed(2)} ETB</span>`;
+                document.getElementById('orderList').appendChild(li);
+            });
+            
+            document.getElementById('totalPrice').textContent = `Total: ${total.toFixed(2)} ETB`;
+            document.getElementById('orderSummary').style.display = 'block';
+            
+            event.target.textContent = 'Added!';
+            setTimeout(() => event.target.textContent = 'Add to Order', 1000);
+        }
+        
+        function clearOrder() {
+            orderItems = [];
+            total = 0;
+            document.getElementById('orderList').innerHTML = '';
+            document.getElementById('totalPrice').textContent = 'Total: 0.00 ETB';
+            document.getElementById('orderSummary').style.display = 'none';
+        }
+        
+        function confirmOrder() {
+            if (orderItems.length === 0) return alert('Order is empty');
+            let summary = orderItems.map(i => `${i.name}: ${i.price.toFixed(2)} ETB`).join('\n');
+            alert(`Order:\n${summary}\n\nTotal: ${total.toFixed(2)} ETB\n\nOrder Confirmed!`);
+            clearOrder();
+        }
+    </script>
+</body>
+</html>
